@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9190652124329148126}
   - component: {fileID: -230953039840109149}
+  - component: {fileID: 7662907356122292929}
   m_Layer: 0
   m_Name: Quarter Jelly
   m_TagString: Untagged
@@ -48,11 +49,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eef4964ae603ba741bdda237e0a1622e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jellyColor: 0
   quarters:
   - {fileID: 3282066834039779749}
   - {fileID: 5547464391020109734}
   - {fileID: 6145992137967705507}
   - {fileID: 8442368787569628629}
+--- !u!114 &7662907356122292929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108957967506521918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7720d3883c106e54fb18f5a947b92896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3282066834039779749
 GameObject:
   m_ObjectHideFlags: 0

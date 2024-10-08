@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectiveManager : MonoBehaviour
 {
     public LevelConfigurator levelConfigurator; // Reference to LevelConfigurator
-
+    public ObjectiveUIManager objectiveUIManager;
     private Dictionary<Jelly.JellyColor, int> jellyGoals = new Dictionary<Jelly.JellyColor, int>();
     private Dictionary<Jelly.JellyColor, int> jellyCounts = new Dictionary<Jelly.JellyColor, int>();
 
@@ -41,6 +41,8 @@ public class ObjectiveManager : MonoBehaviour
             UpdateJellyCountUI(); // Update UI on collection
             CheckObjectives();
         }
+
+        objectiveUIManager.UpdateObjective(color);
     }
 
     void CheckObjectives()

@@ -20,8 +20,11 @@ MonoBehaviour:
   - {x: 4, y: 0}
   - {x: 0, y: 2}
   - {x: 4, y: 2}
-  startingJellyPositions:
-  - {x: 0, y: 1}
+  startingJellies:
+  - position: {x: 0, y: 0}
+    jellyType: 0
+  - position: {x: 1, y: 1}
+    jellyType: 1
   jellyPrefabs:
   - {fileID: 1442083126897069595, guid: c500a7958f52154498ab0149404424ed, type: 3}
   - {fileID: 8773876781023788098, guid: f331b2c5539d5f3449687e29edbfd59c, type: 3}

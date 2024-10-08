@@ -59,7 +59,7 @@ public class GridManager : MonoBehaviour
     // Check if a specific cell is empty
     public bool IsCellEmpty(int x, int y)
     {
-        return gridArray[x, y] == null; // Check for null reference
+        return gridArray[x, y] == null || gridArray[x, y].tag == "ActiveCell";
     }
 
     // Return a random jelly prefab
@@ -68,26 +68,43 @@ public class GridManager : MonoBehaviour
     // Load starting jellies based on predefined positions
     private void LoadStartingJellies()
     {
-        foreach (Vector2Int position in levelConfiguration.startingJellyPositions)
+        foreach (JellyInfo jellyInfo in levelConfiguration.startingJellies)
         {
             // Check if this position is blocked
-            if (levelConfiguration.blockedCells.Contains(position))
+            if (levelConfiguration.blockedCells.Contains(jellyInfo.position))
             {
-                Debug.LogWarning($"Position {position} is blocked. Skipping jelly placement.");
+                Debug.LogWarning($"Position {jellyInfo.position} is blocked. Skipping jelly placement.");
                 continue;
             }
 
-            GameObject jellyPrefab = GetRandomJellyPrefab();
-            PlaceJellyAtPosition(position.x, position.y, jellyPrefab);
+            GameObject jellyPrefab = GetJellyPrefabByType(jellyInfo.jellyType);
+            PlaceJellyAtPosition(jellyInfo.position.x, jellyInfo.position.y, jellyPrefab);
+        }
+    }
+
+     // Get jelly prefab based on type
+    private GameObject GetJellyPrefabByType(JellyType jellyType)
+    {
+        switch (jellyType)
+        {
+            case JellyType.Full:
+                return jellyPrefabs[0]; // Assuming this is your full jelly prefab
+            case JellyType.Halves:
+                return jellyPrefabs[1]; // Assuming this is your halves jelly prefab
+            case JellyType.Quarters:
+                return jellyPrefabs[2]; // Assuming this is your quarters jelly prefab
+            default:
+                Debug.LogWarning($"Unknown jelly type: {jellyType}. Defaulting to first jelly prefab.");
+                return jellyPrefabs[0]; // Fallback to the first jelly prefab
         }
     }
 
     // Convert grid coordinates to world position
     public Vector3 GetWorldPosition(int x, int y)
     {
-        float offsetX = (levelConfiguration.gridWidth / 2f) * cellSize;
-        float offsetY = (levelConfiguration.gridHeight / 2f) * cellSize;
-        return new Vector3(x * cellSize - offsetX, 0, y * cellSize - offsetY);
+        float offsetX = (levelConfiguration.gridWidth - 1) / 2f * cellSize;
+        float offsetY = (levelConfiguration.gridHeight - 1) / 2f * cellSize;
+        return new Vector3(x * cellSize - offsetX, 1f, y * cellSize - offsetY);
     }
 
     // Place a jelly at a specific grid position

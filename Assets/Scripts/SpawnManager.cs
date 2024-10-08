@@ -6,28 +6,48 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject[] jellyPrefabs;
     public Transform spawnArea;
-    public int spawnCount = 5;
+    private GameObject currentJelly;
+    private bool isJellyActive = false;
 
     void Start()
     {
-        SpawnJellies();
+        SpawnJelly();
     }
 
-    void SpawnJellies()
+    void SpawnJelly()
     {
-        for (int i = 0; i < spawnCount; i++)
+        if (currentJelly == null) 
         {
-            GameObject jelly = Instantiate(jellyPrefabs[Random.Range(0, jellyPrefabs.Length)], GetRandomPosition(), Quaternion.identity);
-            jelly.transform.parent = spawnArea;
+            currentJelly = Instantiate(jellyPrefabs[Random.Range(0, jellyPrefabs.Length)], GetRandomPosition(), Quaternion.identity);
+            currentJelly.transform.parent = spawnArea;
+
+            if (!currentJelly.GetComponent<JellyDrag>())
+            {
+                currentJelly.AddComponent<JellyDrag>();
+            }
+
+            if (!currentJelly.GetComponent<Collider>())
+            {
+                currentJelly.AddComponent<BoxCollider>();
+            }
+
+            isJellyActive = true;
         }
     }
 
+    // Called when a jelly is placed successfully
+    public void OnJellyPlaced()
+    {
+        isJellyActive = false;
+        currentJelly = null;
+        SpawnJelly();
+    }
+
+    // Generate a random position within the spawn area
     Vector3 GetRandomPosition()
     {
-        float x = Random.Range(-spawnArea.localScale.x / 2, spawnArea.localScale.x / 2);
-        float y = Random.Range(-spawnArea.localScale.y / 2, spawnArea.localScale.y / 2);
-        Vector3 spawnPosition = spawnArea.position + new Vector3(x, y, 0);
         
+        Vector3 spawnPosition = spawnArea.position + Vector3.up;
         return spawnPosition;
     }
 }

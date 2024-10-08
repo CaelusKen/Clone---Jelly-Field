@@ -220,6 +220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9163237464917356763}
   - component: {fileID: -4259610392096122912}
+  - component: {fileID: -384449631843734539}
   m_Layer: 0
   m_Name: Halves Jelly
   m_TagString: Untagged
@@ -256,6 +257,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7a0ebb200ae7f418945ce4ad5b6035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jellyColor: 0
   halves:
   - {fileID: 703405095078369315}
   - {fileID: 8591939205371647204}
+--- !u!114 &-384449631843734539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8773876781023788098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7720d3883c106e54fb18f5a947b92896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

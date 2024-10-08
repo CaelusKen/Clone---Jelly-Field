@@ -737,13 +737,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.28642732, y: -0, z: -0, w: 0.95810205}
-  m_LocalPosition: {x: 1.81, y: 3.51, z: -7.97}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
+  m_LocalPosition: {x: 1.98, y: 3.4, z: -7.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 33.288, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!1 &1076588098
 GameObject:
   m_ObjectHideFlags: 0
@@ -933,9 +933,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 319b9aee5aa39c849b1d92c3a6020012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jellyPrefabs: []
+  jellyPrefabs:
+  - {fileID: 1442083126897069595, guid: c500a7958f52154498ab0149404424ed, type: 3}
+  - {fileID: 8773876781023788098, guid: f331b2c5539d5f3449687e29edbfd59c, type: 3}
+  - {fileID: 108957967506521918, guid: 53491d7904e239646a5d540372122352, type: 3}
   spawnArea: {fileID: 1278155963}
-  spawnCount: 5
 --- !u!1 &1520581601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1598,6 +1600,8 @@ MonoBehaviour:
   - {fileID: 108957967506521918, guid: 53491d7904e239646a5d540372122352, type: 3}
   fullJellyPrefab: {fileID: 1442083126897069595, guid: c500a7958f52154498ab0149404424ed, type: 3}
   levelConfiguration: {fileID: 11400000, guid: 373b68307e84c1f42a1d697713c5f00d, type: 2}
+  objectiveManager: {fileID: 0}
+  uiManager: {fileID: 0}
 --- !u!4 &1979017467
 Transform:
   m_ObjectHideFlags: 0
