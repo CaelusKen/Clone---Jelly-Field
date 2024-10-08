@@ -4,6 +4,8 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     public float cellSize = 1f;
+    private Vector2Int lastSpawnPosition = new Vector2Int(0, 0);
+    public Vector3 gridStartPosition;
     public GameObject[] jellyPrefabs;
     public GameObject fullJellyPrefab; // Declare fullJellyPrefab
     private GameObject[,] gridArray;
@@ -30,6 +32,15 @@ public class GridManager : MonoBehaviour
     private void InitializeGrid(int width, int height)
     {
         gridArray = new GameObject[width, height];
+    }
+
+    // Method to calculate the world position of a grid cell based on grid coordinates
+    public Vector3 GetCellWorldPosition(Vector2Int gridPosition)
+    {
+        float xPos = gridStartPosition.x + gridPosition.x * cellSize;
+        float yPos = gridStartPosition.y;
+        float zPos = gridStartPosition.z + gridPosition.y * cellSize;
+        return new Vector3(xPos, yPos, zPos);
     }
 
     // Display the playfield by instantiating Active Cell prefabs
@@ -104,7 +115,9 @@ public class GridManager : MonoBehaviour
     {
         float offsetX = (levelConfiguration.gridWidth - 1) / 2f * cellSize;
         float offsetY = (levelConfiguration.gridHeight - 1) / 2f * cellSize;
-        return new Vector3(x * cellSize - offsetX, 1f, y * cellSize - offsetY);
+
+        float prefabHeightAdjustment = 0.5f;
+        return new Vector3(x * cellSize - offsetX, prefabHeightAdjustment, y * cellSize - offsetY);
     }
 
     // Place a jelly at a specific grid position
@@ -137,6 +150,16 @@ public class GridManager : MonoBehaviour
     }
 
     public bool IsBlockedCell(Vector2Int position) => levelConfiguration.blockedCells.Contains(position);
+
+    public void UpdateLastSpawnPosition(Vector2Int newPosition)
+    {
+        lastSpawnPosition = newPosition;
+    }
+
+    public Vector2Int GetLastSpawnPosition()
+    {
+        return lastSpawnPosition;
+    }
 
     public void MergeJellies(Vector2Int position)
     {
@@ -200,9 +223,9 @@ public class GridManager : MonoBehaviour
         }
 
         // If no empty cells and no possible merges
-    Debug.Log("Game Over!");
-    // Trigger game over UI or logic
-    uiManager.ShowGameOverPanel();
+        Debug.Log("Game Over!");
+        // Trigger game over UI or logic
+        uiManager.ShowGameOverPanel();
     }
 
     // Utility method to check if a position is within grid bounds
@@ -302,13 +325,24 @@ public class GridManager : MonoBehaviour
     void OnDrawGizmos()
     {
         if (gridArray == null) return;
+
+        Gizmos.color = Color.gray;
         for (int x = 0; x < levelConfiguration.gridWidth; x++)
         {
             for (int y = 0; y < levelConfiguration.gridHeight; y++)
             {
                 Vector3 pos = GetWorldPosition(x, y);
-                Gizmos.color = Color.gray;
-                Gizmos.DrawWireCube(pos + new Vector3(cellSize, 0, cellSize) / 2, new Vector3(cellSize, 0, cellSize));
+                Gizmos.DrawWireCube(pos, new Vector3(cellSize, 0.1f, cellSize)); // Adjust height to match your grid
+            }
+        }
+
+        // Draw the positions of the jellies for debugging
+        foreach (var jelly in gridArray)
+        {
+            if (jelly != null)
+            {
+                Gizmos.color = Color.blue; // Different color for jellies
+                Gizmos.DrawSphere(jelly.transform.position, 0.2f); // Adjust size for visibility
             }
         }
     }

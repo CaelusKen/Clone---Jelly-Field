@@ -9,6 +9,8 @@ public class SpawnManager : MonoBehaviour
     private GameObject currentJelly;
     private bool isJellyActive = false;
 
+    private GridManager gridManager;
+
     void Start()
     {
         SpawnJelly();
@@ -33,6 +35,13 @@ public class SpawnManager : MonoBehaviour
 
             isJellyActive = true;
         }
+        else
+        {
+            // Spawn the new jelly at the last position after a successful placement
+            Vector2Int lastPosition = gridManager.GetLastSpawnPosition();
+            Vector3 spawnWorldPosition = gridManager.GetWorldPosition(lastPosition.x, lastPosition.y);
+            currentJelly.transform.position = spawnWorldPosition;  // Move existing jelly to last spawn position
+        }
     }
 
     // Called when a jelly is placed successfully
@@ -47,7 +56,8 @@ public class SpawnManager : MonoBehaviour
     Vector3 GetRandomPosition()
     {
         
-        Vector3 spawnPosition = spawnArea.position + Vector3.up;
+        Vector3 spawnPosition = spawnArea.position + Vector3.up * 0.15f;
+        spawnPosition.z = spawnArea.position.z;
         return spawnPosition;
     }
 }

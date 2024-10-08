@@ -6,23 +6,18 @@ public class QuartersJelly : Jelly
 {
     public GameObject[] quarters; // Array of quarter jelly parts
 
-    public override bool CanMergeWith(Jelly otherJelly)
-    {
-        return otherJelly is HalvesJelly;
-    }
-
     void Start()
     {
-        GenerateRandomColor(); // Set a random color for quarters
-        SetQuarterColor(jellyColor); // Set color for quarter jellies based on the jellyColor enum
+        SetQuartersColors(); // Set different random colors for each quarter
     }
 
-    // Set color for each quarter
-    public void SetQuarterColor(JellyColor color)
+    // Set random color for each quarter
+    public void SetQuartersColors()
     {
-        Color unityColor = GetUnityColor(color); // Convert to Unity Color
         foreach (GameObject part in quarters)
         {
+            JellyColor randomColor = (JellyColor)Random.Range(0, System.Enum.GetValues(typeof(JellyColor)).Length);
+            Color unityColor = GetUnityColor(randomColor); // Convert to Unity Color
             Renderer renderer = part.GetComponent<Renderer>();
             if (renderer != null)
             {
@@ -31,14 +26,16 @@ public class QuartersJelly : Jelly
         }
     }
 
+    public override bool CanMergeWith(Jelly otherJelly)
+    {
+        return otherJelly is HalvesJelly;
+    }
+
     public override void MergeWith(Jelly otherJelly)
     {
-        // Check if the other jelly is a HalvesJelly
         if (otherJelly is HalvesJelly)
         {
-            // Logic for merging with a halves jelly could go here
             Destroy(gameObject); // Destroy this quarter jelly
-            // Add additional logic if required
         }
     }
 }

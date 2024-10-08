@@ -8,11 +8,15 @@ public class JellyDrag : MonoBehaviour
     private bool isDragging = false;
     private Vector3 originalPosition;
     private GridManager gridManager;
+
+    private float minY; 
     
     void Start()
     {
         gridManager = FindObjectOfType<GridManager>();  // Reference to the grid manager
         originalPosition = transform.position;
+
+        minY = 0.5f;
     }
 
     void OnMouseDown()
@@ -25,7 +29,15 @@ public class JellyDrag : MonoBehaviour
     {
         if (isDragging)
         {
-            transform.position = GetMouseWorldPosition() + offset;  // Dragging movement
+            Vector3 newPosition = GetMouseWorldPosition() + offset;  // Dragging movement
+
+            // Restrict movement below a certain Y value
+            if (newPosition.y < minY)
+            {
+                newPosition.y = minY; // Keep jelly at or above the minimum Y
+            }
+
+            transform.position = newPosition; // Update position
         }
     }
 
@@ -41,15 +53,17 @@ public class JellyDrag : MonoBehaviour
 
         // Snap the jelly to the grid position
         Vector3 snappedPosition = gridManager.GetWorldPosition(gridPosition.x, gridPosition.y);
+        snappedPosition.y = minY; // Ensure jelly is positioned correctly above the grid
 
         // Place the jelly only if the grid cell is valid and empty
         if (gridManager.IsCellEmpty(gridPosition.x, gridPosition.y) && 
             !gridManager.IsBlockedCell(gridPosition))
         {
             transform.position = snappedPosition;  // Snap jelly to grid
-
-            // You can add your logic to mark the cell as occupied or interact with objectives
             gridManager.PlaceJellyAtPosition(gridPosition.x, gridPosition.y, gameObject);
+            
+            // Update last spawn position when placing jelly
+            gridManager.UpdateLastSpawnPosition(gridPosition); // This line is correct
         }
         else
         {

@@ -10,21 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93fc5cb9e1e049c41b92197154f582f9, type: 3}
-  m_Name: Level 1
+  m_Name: Level 2
   m_EditorClassIdentifier: 
   gridStartPosition: {x: 0, y: 0, z: 0}
-  gridWidth: 5
-  gridHeight: 3
-  blockedCells:
-  - {x: 0, y: 0}
-  - {x: 4, y: 0}
-  - {x: 0, y: 2}
-  - {x: 4, y: 2}
-  startingJellies:
-  - position: {x: 0, y: 0}
-    jellyType: 0
-  - position: {x: 1, y: 1}
-    jellyType: 1
+  gridWidth: 3
+  gridHeight: 4
+  blockedCells: []
+  startingJellies: []
   jellyPrefabs:
   - {fileID: 1442083126897069595, guid: c500a7958f52154498ab0149404424ed, type: 3}
   - {fileID: 8773876781023788098, guid: f331b2c5539d5f3449687e29edbfd59c, type: 3}
@@ -32,7 +24,5 @@ MonoBehaviour:
   activeCellPrefab: {fileID: 880428848669075905, guid: 0b098bf59301f2c4a835fa01f3c56861, type: 3}
   spawnCellPosition: {x: 0, y: 0, z: 0}
   jellyGoals:
-  - jellyColor: 2
-    requiredCount: 4
-  - jellyColor: 1
-    requiredCount: 4
+  - jellyColor: 0
+    requiredCount: 6
