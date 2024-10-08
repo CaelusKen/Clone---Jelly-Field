@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93fc5cb9e1e049c41b92197154f582f9, type: 3}
+  m_Name: Level 1
+  m_EditorClassIdentifier: 
+  gridStartPosition: {x: 0, y: 0, z: 0}
+  gridWidth: 5
+  gridHeight: 3
+  blockedCells:
+  - {x: 0, y: 0}
+  - {x: 4, y: 0}
+  - {x: 0, y: 2}
+  - {x: 4, y: 2}
+  startingJellyPositions:
+  - {x: 0, y: 1}
+  jellyPrefabs:
+  - {fileID: 1442083126897069595, guid: c500a7958f52154498ab0149404424ed, type: 3}
+  - {fileID: 8773876781023788098, guid: f331b2c5539d5f3449687e29edbfd59c, type: 3}
+  - {fileID: 108957967506521918, guid: 53491d7904e239646a5d540372122352, type: 3}
+  activeCellPrefab: {fileID: 880428848669075905, guid: 0b098bf59301f2c4a835fa01f3c56861, type: 3}
+  spawnCellPosition: {x: 0, y: 0, z: 0}
+  jellyGoals:
+  - jellyColor: 0
+    requiredCount: 5
+  - jellyColor: 1
+    requiredCount: 5
